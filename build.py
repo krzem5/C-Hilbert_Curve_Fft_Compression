@@ -44,7 +44,7 @@ else:
 					fl.append(f"build/{(r+f).replace('/','$')}.o")
 					if (subprocess.run(["gcc","-Wall","-lm","-Werror","-O3","-c",r+f,"-o",f"build/{(r+f).replace('/','$')}.o","-Isrc/include"]).returncode!=0):
 						sys.exit(1)
-		if (subprocess.run(["gcc","-o","build/hilbert_curve_fft_compression"]+fl).returncode!=0):
+		if (subprocess.run(["gcc","-o","build/hilbert_curve_fft_compression"]+fl+["-lm"]).returncode!=0):
 			sys.exit(1)
 	else:
 		fl=[]
@@ -55,7 +55,7 @@ else:
 					fl.append(f"build/{(r+f).replace('/','$')}.o")
 					if (subprocess.run(["gcc","-Wall","-lm","-Werror","-O0","-c",r+f,"-o",f"build/{(r+f).replace('/','$')}.o","-Isrc/include"]).returncode!=0):
 						sys.exit(1)
-		if (subprocess.run(["gcc","-o","build/hilbert_curve_fft_compression"]+fl).returncode!=0):
+		if (subprocess.run(["gcc","-o","build/hilbert_curve_fft_compression"]+fl+["-lm"]).returncode!=0):
 			sys.exit(1)
 	if ("--run" in sys.argv):
 		subprocess.run(["build/hilbert_curve_fft_compression"]+DEFAULT_ARGS)
