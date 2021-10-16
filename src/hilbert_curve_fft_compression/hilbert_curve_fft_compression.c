@@ -82,10 +82,11 @@ void compress_matrix(uint8_t* bf,compressed_data_t* o){
 		}
 		re/=MATRIX_SIZE*MATRIX_SIZE;
 		im/=MATRIX_SIZE*MATRIX_SIZE;
-		e[i].r=sqrtf(re*re+im*im);
-		if (e[i].r>=MIN_AMPLITUDE){
-			e[i].f=j;
+		e[i].r=re*re+im*im;
+		if (e[i].r>=MIN_AMPLITUDE*MIN_AMPLITUDE){
+			e[i].r=sqrtf(e[i].r);
 			e[i].s=atan2f(-im,re);
+			e[i].f=j;
 			i++;
 		}
 	}
