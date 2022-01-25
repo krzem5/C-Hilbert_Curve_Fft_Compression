@@ -1,4 +1,5 @@
 #ifdef _MSC_VER
+#define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #endif
 #include <hilbert_curve_fft_compression.h>
@@ -39,8 +40,13 @@ int main(int argc,const char** argv){
 	for (uint16_t i=0;i<dt.sz;i++){
 		printf("[%u]: %u, %f, %f\n",i,(dt.dt+i)->f,(dt.dt+i)->r,(dt.dt+i)->s);
 	}
-	decompress_matrix(&dt,m);
+	for (uint16_t i=1;i<=dt.sz;i++){
+		compressed_data_t n_dt=dt;
+		n_dt.sz=i;
+		decompress_matrix(&n_dt,m);
+		printf("Waves: %u\n",i);
+		print_matrix(m);
+	}
 	free(dt.dt);
-	print_matrix(m);
 	return 0;
 }
